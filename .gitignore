@@ -1,0 +1,8 @@
+local.properties
+intermediates/
+generated/
+build/
+.idea
+.gradle/
+*.rawproto
+*.iml

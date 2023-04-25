@@ -1,0 +1,15 @@
+/*
+ * Copyright (c) 2023, Oracle and/or its affiliates.
+ * Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
+ */
+ 
+ project.ext {
+    compileSdkVersion = 30
+    minSdkVersion = 26
+    nav_version = "2.3.1"
+    kotlin_version = '1.6.10'
+    gradle_version = '7.2.1'
+    gms_version = '4.3.3'
+    sdk_github_version = '1.0'
+    jfrog_version = '4.24.20'
+}

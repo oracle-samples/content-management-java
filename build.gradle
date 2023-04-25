@@ -1,0 +1,65 @@
+/*
+ * Copyright (c) 2023, Oracle and/or its affiliates.
+ * Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
+ */
+
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    project.apply from: "${rootDir}/constants.gradle"
+
+    repositories {
+        mavenCentral()
+        google()
+
+    }
+    dependencies {
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
+        classpath "com.android.tools.build:gradle:$gradle_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "com.google.gms:google-services:$gms_version"
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:$jfrog_version"
+    }
+
+}
+
+// for publishing SDK builds to maven repositories and generating license report
+plugins {
+    id "maven-publish"
+    id "com.jfrog.artifactory" version "$jfrog_version"
+    id 'com.github.jk1.dependency-license-report' version '2.1' apply false
+}
+
+allprojects {
+    apply plugin: 'com.jfrog.artifactory'
+    apply plugin: 'maven-publish'
+    repositories {
+        mavenCentral()
+        google()
+    }
+}
+
+artifactoryPublish.skip = true
+
+project('content-delivery') {
+    apply plugin: 'java'
+    artifactoryPublish.dependsOn('build')
+    // settings for publishing the .jar to a local maven repository
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+                artifactId = project.getName()
+                //artifact("$buildDir/libs/oce-delivery-sdk-${version}.jar")
+            }
+        }
+        artifactoryPublish {
+            publications(publishing.publications.mavenJava)
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
