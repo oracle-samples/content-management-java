@@ -10,6 +10,6 @@
     kotlin_version = '1.6.10'
     gradle_version = '7.2.1'
     gms_version = '4.3.3'
-    sdk_github_version = '1.0'
+    sdk_github_version = '1.0.1'
     jfrog_version = '4.24.20'
 }
