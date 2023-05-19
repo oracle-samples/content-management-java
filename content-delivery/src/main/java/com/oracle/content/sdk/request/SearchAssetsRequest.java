@@ -13,6 +13,7 @@ import com.oracle.content.sdk.request.core.SearchQueryBuilder;
 import com.google.gson.JsonElement;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -207,11 +208,15 @@ public class SearchAssetsRequest extends PaginatedListRequest<SearchAssetsReques
         return getThis();
     }
 
-    /*
-    @Override protected SearchContentItemsRequest getThis() {
-        return this;
+    /**
+     * Filter results to a specific category node id.
+     *
+     * @param nodeId specific category node to match
+     * @return this
+     */
+    public SearchAssetsRequest taxonomyCategoryNodeId(String nodeId) {
+        return taxonomyCategoryNodeIds(Collections.singletonList(nodeId));
     }
-    */
 
 
     /**
